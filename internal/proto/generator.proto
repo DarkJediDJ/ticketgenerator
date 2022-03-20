@@ -12,10 +12,10 @@ message TicketRequset {
     string title = 5;
 }
 
-message LinkReply{
-    string link = 1;
+message IDReply{
+    int64 ID = 1;
 }
 
 service TicketGenerator {
-    rpc GetTicket(TicketRequset) returns (LinkReply) {}
+    rpc GetTicket(TicketRequset) returns (IDReply) {}
 }

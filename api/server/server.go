@@ -5,14 +5,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	cloud "github.com/darkjedidj/ticketgenerator/api/aws"
-	pb "github.com/darkjedidj/ticketgenerator/api/proto"
 	ticket "github.com/darkjedidj/ticketgenerator/internal/filegen"
+	pb "github.com/darkjedidj/ticketgenerator/internal/proto"
 	"github.com/joho/godotenv"
 )
 
@@ -20,7 +18,8 @@ type Server struct {
 	pb.UnimplementedTicketGeneratorServer
 }
 
-func (s *Server) GetTicket(ctx context.Context, in *pb.TicketRequset) (*pb.LinkReply, error) {
+// GetTicket creates PDF file, stores it in S3 and returns ID
+func (s *Server) GetTicket(ctx context.Context, in *pb.TicketRequset) (*pb.IDReply, error) {
 
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -56,19 +55,5 @@ func (s *Server) GetTicket(ctx context.Context, in *pb.TicketRequset) (*pb.LinkR
 		return nil, err
 	}
 
-	svc := s3.New(session)
-	params := &s3.GetObjectInput{
-		Bucket: aws.String(S3BucketName),
-		Key:    aws.String(fmt.Sprintf("%v", in.Id)),
-	}
-
-	req, _ := svc.GetObjectRequest(params)
-
-	url, err := req.Presign(15 * time.Minute) // Set link expiration time
-	if err != nil {
-		log.Fatalf("[AWS GET LINK]: %q,%v", params, err)
-		return nil, err
-	}
-
-	return &pb.LinkReply{Link: url}, nil
+	return &pb.IDReply{ID: in.Id}, nil
 }

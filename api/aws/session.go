@@ -10,6 +10,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// AwsServiceInterface describes necessary methods
 type AwsServiceInterface interface {
 	GetSession() *session.Session
 }
@@ -22,6 +23,7 @@ var (
 	AwsService AwsServiceInterface = &awsService{}
 )
 
+// GetSession creates new S3 connection
 func (as *awsService) GetSession() *session.Session {
 	err := godotenv.Load(".env")
 	if err != nil {

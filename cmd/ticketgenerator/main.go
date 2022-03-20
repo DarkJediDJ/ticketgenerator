@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/darkjedidj/ticketgenerator/api/proto"
 	"github.com/darkjedidj/ticketgenerator/api/server"
+	pb "github.com/darkjedidj/ticketgenerator/internal/proto"
 	"google.golang.org/grpc"
 )
 

@@ -5,11 +5,12 @@ import (
 	"log"
 	"os"
 
-	pb "github.com/darkjedidj/ticketgenerator/api/proto"
+	pb "github.com/darkjedidj/ticketgenerator/internal/proto"
 	"github.com/johnfercher/maroto/pkg/consts"
 	"github.com/johnfercher/maroto/pkg/pdf"
 )
 
+// Generate creates new PDF file with arguments
 func Generate(in *pb.TicketRequset) error {
 	m := pdf.NewMaroto(consts.Portrait, consts.A4)
 	m.SetPageMargins(10, 15, 10)
@@ -45,6 +46,7 @@ func Generate(in *pb.TicketRequset) error {
 	return nil
 }
 
+// Delete file created by Generate()
 func Delete(id int64) {
 	err := os.Remove(fmt.Sprintf("internal/tickets/%v.pdf", id))
 	if err != nil {
