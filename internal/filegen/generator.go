@@ -26,7 +26,7 @@ func Generate(in *pb.TicketRequset) error {
 	})
 	m.Row(12, func() {
 		m.Col(12, func() {
-			m.Text(fmt.Sprintf("Ticket Price: %v", in.Price))
+			m.Text(fmt.Sprintf("Ticket Price: %f", in.Price))
 		})
 	})
 	m.Row(13, func() {

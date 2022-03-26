@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.6.1
-// source: internal/proto/generator.proto
+// source: generator.proto
 
 package ticketgenerator
 
@@ -101,5 +101,5 @@ var TicketGenerator_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "internal/proto/generator.proto",
+	Metadata: "generator.proto",
 }
