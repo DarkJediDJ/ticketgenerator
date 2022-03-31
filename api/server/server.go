@@ -11,7 +11,7 @@ import (
 	cloud "github.com/darkjedidj/ticketgenerator/api/aws"
 	ticket "github.com/darkjedidj/ticketgenerator/internal/filegen"
 	pb "github.com/darkjedidj/ticketgenerator/internal/proto"
-	"github.com/joho/godotenv"
+// 	"github.com/joho/godotenv"
 )
 
 type Server struct {
@@ -21,12 +21,12 @@ type Server struct {
 // GetTicket creates PDF file, stores it in S3 and returns ID
 func (s *Server) GetTicket(ctx context.Context, in *pb.TicketRequset) (*pb.IDReply, error) {
 
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+// 	err := godotenv.Load(".env")
+// 	if err != nil {
+// 		log.Fatal("Error loading .env file")
+// 	}
 
-	err = ticket.Generate(in)
+	err := ticket.Generate(in)
 	if err != nil {
 		return nil, err
 	}
