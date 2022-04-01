@@ -31,6 +31,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    environment: dev
     needs: build-push
     steps:
       - name: Checkout code
