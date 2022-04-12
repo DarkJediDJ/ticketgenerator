@@ -1,1 +1,3 @@
-# Ticketgenerator is a golang service, that provides PDF ticket generation and uploaading it in S3 bucket
+# Ticketgenerator is a golang service.
+
+This service provides PDF ticket generation and uploading it in S3 bucket.
